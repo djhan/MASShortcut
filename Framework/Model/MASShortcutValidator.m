@@ -45,6 +45,12 @@
         // Allow Option modifier with any key even if it will break the system binding
         if (_allowAnyShortcutWithOptionModifier) return YES;
     }
+    // 특정 상황에서 Shift 키 조합 단축키 허용
+    BOOL includesShift = ((modifiers & NSEventModifierFlagShift) > 0);
+    if (includesShift) {
+        // Shift + Space를 허용
+        if (keyCode == kVK_Space) return YES;  
+    }
 
     // The hotkey does not have any modifiers or violates system bindings
     return NO;
